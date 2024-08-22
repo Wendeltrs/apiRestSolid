@@ -1,0 +1,23 @@
+{
+  "name": "api-rest-node-solid",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Wendeltrs/apiRestSolid.git",
+  "author": "Wendel Tavares",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src -d build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "ts-node-dev": "^2.0.0",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "fastify": "^4.28.1"
+  }
+}
