@@ -19,4 +19,25 @@ model User{ //Cria tabela no BD
   id String @id @default(uuid())
   email String @unique
   nome String
+  password_hash String?
+  creates_at DateTime @default(now())
+}
+
+model CheckIn {
+  @@map("check_ins")
+
+  id String @id @default(uuid())
+  created_at DateTime @default(now())
+  validated_at DateTime?
+}
+
+model Gym {
+  @@map("gyms")
+
+  id String @id @default(uuid())
+  title String
+  description String?
+  phone String?
+  latitude Decimal
+  longitude Decimal
 }
