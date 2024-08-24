@@ -12,11 +12,14 @@
     "start": "node build/server.js",
     "build": "tsup src -d build",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:ui": "vitest --ui"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.5.0",
+    "@vitest/coverage-v8": "^2.0.5",
     "prisma": "^5.18.0",
     "ts-node-dev": "^2.0.0",
     "tsup": "^8.2.4",

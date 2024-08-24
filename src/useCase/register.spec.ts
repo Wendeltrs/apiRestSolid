@@ -1,24 +1,26 @@
 import { describe, expect, it } from 'vitest'
 import { RegisterUseCase } from './register'
 import { compare } from 'bcryptjs'
+import { InMemoryUsersRepository } from 'src/repositories/in-memory/in-memory-users-repository'
+import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 
 describe('Register Use Case', () => {
-    it('Should hash user password upon registration', async () => {
-        const registerUseCase = new RegisterUseCase({
-            async create(data) {
-                return {
-                    id: 'user-1',
-                    nome: data.nome,
-                    email: data.email,
-                    password_hash: String(data.password_hash),
-                    creates_at: new Date()
-                }
-            },
+    it('Should be able to register', async () => {
+        const usersRepository = new InMemoryUsersRepository()
+        const registerUseCase = new RegisterUseCase(usersRepository)
 
-            async findByEmail(_email) {
-                return null
-            },
+        const { user } = await registerUseCase.execute({
+            nome: 'Wendel Tavares',
+            email: 'wendel@oiiexemplo.com',
+            password: '123456'
         })
+
+        expect(user.id).toEqual(expect.any(String))
+    })
+
+    it('Should hash user password upon registration', async () => {
+        const usersRepository = new InMemoryUsersRepository()
+        const registerUseCase = new RegisterUseCase(usersRepository)
 
         const { user } = await registerUseCase.execute({
             nome: 'Wendel Tavares',
@@ -32,5 +34,26 @@ describe('Register Use Case', () => {
         )
 
         expect(isPasswordCorrectlyHashed).toBe(true)
+    })
+
+    it('Should not be able to register with same email twice', async () => {
+        const usersRepository = new InMemoryUsersRepository()
+        const registerUseCase = new RegisterUseCase(usersRepository)
+
+        const email = 'wendel@oiiiexemplo.com'
+
+        await registerUseCase.execute({
+            nome: 'Wendel Tavares',
+            email,
+            password: '123456'
+        })        
+
+        await expect(() => 
+            registerUseCase.execute({
+                nome: 'Wendel Tavares',
+                email,
+                password: '123456'
+            })
+        ).rejects.toBeInstanceOf(UserAlreadyExistsError)
     })
 })
