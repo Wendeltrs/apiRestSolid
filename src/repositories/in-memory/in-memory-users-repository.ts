@@ -4,6 +4,14 @@ import { UserRepository } from "../users-repository";
 export class InMemoryUsersRepository implements UserRepository{ //Cria uma representação do BD
     public itens: User[] = []
 
+    async findById(userId: string) {
+        const user = this.itens.find(item => item.id == userId)
+
+        if(!user) return null
+
+        return user
+    }
+
     async findByEmail(email: string) {
         const user = this.itens.find(item => item.email == email)
 
