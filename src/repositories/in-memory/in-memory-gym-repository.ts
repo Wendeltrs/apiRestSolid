@@ -2,8 +2,14 @@ import { Gym, Prisma } from "@prisma/client";
 import { GymRepository } from "../gym-repository";
 import { randomUUID } from "crypto";
 
-export class InMemoryGymRepository implements GymRepository{ //Cria uma representação do BD
+export class InMemoryGymRepository implements GymRepository{
     public itens: Gym[] = []
+
+    async searchMany(query: string, page: number) {
+        return this.itens
+            .filter((item) => item.title.includes(query))
+            .splice((page - 1) * 20, page * 20)
+    }
 
     async findById(id: string) {
         const gym = this.itens.find(item => item.id == id)
