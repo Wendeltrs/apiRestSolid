@@ -6,7 +6,11 @@ import dayjs from "dayjs";
 export class InMemoryCheckinRepository implements CheckinRepository{
     public itens: CheckIn[] = []
 
-    async findManyByUserId(userId: string, page: number) {
+    async countByUserId(userId: string) { //Obtém o número de chekins feitos
+        return this.itens.filter((item) => item.user_id == userId).length
+    }
+
+    async findManyByUserId(userId: string, page: number) { //Obtém o historico de checkins e faz a paginação com 20 itens por página
         return this.itens
             .filter((item) => item.user_id == userId)
             .slice((page - 1) * 20, page * 20)

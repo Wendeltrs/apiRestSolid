@@ -34,7 +34,7 @@ describe('Fetch User Check in History Use Case', () => {
         ])
     })
 
-    it('Should be able to fetch check in history', async () => {
+    it('Should be able to fetch paginated check in history', async () => {
         for( let i = 1; i <= 22; i++){
             await checkinRepository.create({
                 gym_id: `gym-${i}`,
