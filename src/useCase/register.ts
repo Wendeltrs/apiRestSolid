@@ -12,6 +12,7 @@ interface RegisterUseCaseRequest {
 interface RegisterUseCaseResponse {
     user: User
 }
+
 export class RegisterUseCase {
     constructor(private usersRepository: UserRepository){} //Inversão de dependência: recebe a dependência como parâmetro
 

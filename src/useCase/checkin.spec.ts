@@ -3,18 +3,20 @@ import { InMemoryCheckinRepository } from 'src/repositories/in-memory/in-memory-
 import { CheckinUseCase } from './checkin'
 import { InMemoryGymRepository } from 'src/repositories/in-memory/in-memory-gym-repository'
 import { Decimal } from '@prisma/client/runtime/library' 
+import { MaxDistanceError } from './errors/max-distance-error'
+import { MaxNumberOfCheckinsError } from './errors/max-number-of-checkins-error'
 
 let checkinRepository: InMemoryCheckinRepository
 let gymRepository: InMemoryGymRepository
 let sut: CheckinUseCase
 
 describe('Check in Use Case', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         checkinRepository = new InMemoryCheckinRepository()
         gymRepository = new InMemoryGymRepository()
         sut = new CheckinUseCase(checkinRepository, gymRepository)
 
-        gymRepository.itens.push({
+        await gymRepository.create({
             id: 'gym-01',
             title: 'JS Gym',
             description: '',
@@ -51,7 +53,7 @@ describe('Check in Use Case', () => {
             userLongitude: -43.3608231
         })
 
-        expect(() => 
+        await expect(() => 
             sut.execute({
                 userId: 'user-01',
                 gymId: 'gym-01',
@@ -100,6 +102,6 @@ describe('Check in Use Case', () => {
                 userLatitude: -22.9587436,
                 userLongitude: -43.3667872
             })
-        ).rejects.toBeInstanceOf(Error)
+        ).rejects.toBeInstanceOf(MaxDistanceError)
     })
 })
