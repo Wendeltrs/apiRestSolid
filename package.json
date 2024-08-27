@@ -1,6 +1,5 @@
 {
   "name": "api-rest-node-solid",
-  "type": "module",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Wendeltrs/apiRestSolid.git",
@@ -8,7 +7,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
+    "dev": "ts-node-dev --files src/server.ts",
     "start": "node build/server.js",
     "build": "tsup src -d build",
     "test": "vitest run",
@@ -28,6 +27,7 @@
     "vitest": "^2.0.5"
   },
   "dependencies": {
+    "@fastify/jwt": "^8.0.1",
     "@prisma/client": "^5.18.0",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.13",
