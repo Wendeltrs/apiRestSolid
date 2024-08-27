@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { makeGetUserProfileUseCase } from "../../useCase/factories/make-get-user-profile-use-case";
+import { makeGetUserProfileUseCase } from "../../../useCase/factories/make-get-user-profile-use-case";
 
 export async function profile(req: FastifyRequest, rep: FastifyReply) {    
     const getUserProfile = makeGetUserProfileUseCase()
