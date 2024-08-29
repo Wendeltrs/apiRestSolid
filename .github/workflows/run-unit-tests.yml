@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'yarn'
+          cache: "%LOCALAPPDATA%\\Yarn"
 
       - run: ci
       - run: yarn run test
