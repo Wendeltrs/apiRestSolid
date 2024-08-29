@@ -19,8 +19,13 @@ export async function authenticate(req: FastifyRequest, rep: FastifyReply) {
             password
         })
 
-        const token = await rep.jwtSign({}, { sign: { sub: user.id } })
-        const refreshToken = await rep.jwtSign({}, { sign: { sub: user.id, expiresIn: '7d' } })
+        const token = await rep.jwtSign(
+            { role: user.role }, 
+            { sign: { sub: user.id } })
+
+        const refreshToken = await rep.jwtSign(
+            { role: user.role }, 
+            { sign: { sub: user.id, expiresIn: '7d' } })
 
         return rep
             .setCookie('refreshToken', refreshToken, {

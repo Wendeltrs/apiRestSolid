@@ -3,8 +3,15 @@ import { FastifyReply, FastifyRequest } from "fastify"
 export async function refresh(req: FastifyRequest, rep: FastifyReply) {
     await req.jwtVerify({ onlyCookie: true }) //Valida se o usuário tiver autenticado e não olha para o cabeçalho da aplicação, só olha para os cookies
 
-    const token = await rep.jwtSign({}, { sign: { sub: req.user.sub } })
-    const refreshToken = await rep.jwtSign({}, { sign: { sub: req.user.sub, expiresIn: '7d' } })
+    const { role } = req.user
+
+    const token = await rep.jwtSign(
+        { role }, 
+        { sign: { sub: req.user.sub } })
+
+    const refreshToken = await rep.jwtSign(
+        { role }, 
+        { sign: { sub: req.user.sub, expiresIn: '7d' } })
 
     return rep
         .setCookie('refreshToken', refreshToken, {
