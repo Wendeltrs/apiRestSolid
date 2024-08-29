@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { makeFetchNearbyGymsUseCase } from "src/useCase/factories/make-fetch-nearby-gyms-use-case"
+import { makeFetchNearbyGymsUseCase } from "../../../useCase/factories/make-fetch-nearby-gyms-use-case"
 
 export async function nearby(req: FastifyRequest, rep: FastifyReply) {
     const nearbyGymQuerySchema = z.object({

@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { makeSearchGymUseCase } from "src/useCase/factories/make-search-gym-use-case"
+import { makeSearchGymUseCase } from "../../../useCase/factories/make-search-gym-use-case"
 
 export async function search(req: FastifyRequest, rep: FastifyReply) {
     const searchGymQuerySchema = z.object({

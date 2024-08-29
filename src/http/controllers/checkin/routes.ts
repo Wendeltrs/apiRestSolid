@@ -9,10 +9,10 @@ import { metrics } from "./metrics";
 export async function checkinRoutes(app:FastifyInstance) {
     app.addHook('onRequest', verify)
 
-    app.get('check_ins/history', history)
-    app.get('check_ins/metrics', metrics)
+    app.get('/checkin/history', history)
+    app.get('/checkin/metrics', metrics)
 
-    app.post('/gyms/:gymId/check_ins', create)
+    app.post('/gyms/:gymId/checkin', create)
 
-    app.patch('check_ins/:checkinId/validate', validate)
+    app.patch('/checkin/:checkinId/validate', validate)
 }
