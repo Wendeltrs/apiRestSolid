@@ -1,6 +1,5 @@
 {
   "name": "api-rest-node-solid",
-  "type": "module",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Wendeltrs/apiRestSolid.git",
@@ -35,6 +34,7 @@
     "vitest": "^2.0.5"
   },
   "dependencies": {
+    "@fastify/cookie": "^9.4.0",
     "@fastify/jwt": "^8.0.1",
     "@prisma/client": "^5.18.0",
     "bcryptjs": "^2.4.3",

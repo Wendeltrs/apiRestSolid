@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
-import { makeValidateCheckinUseCase } from "src/useCase/factories/make-validate-checkin-use-case"
+import { makeValidateCheckinUseCase } from "../../../useCase/factories/make-validate-checkin-use-case"
 
 export async function validate(req: FastifyRequest, rep: FastifyReply) {
     const vaildateCheckinParamsSchema = z.object({
